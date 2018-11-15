@@ -13,5 +13,19 @@
         <li>Style the element (e.g. paragraph) holding your output text differently in both components</li>
       </ol>
     </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Solution</h3>
+        <app-game-control (event)="addComponent($event)"></app-game-control>
+        <ng-container *ngFor="let nr of allNumbers;">
+          <ng-template [ngIf]="(nr % 2 == 0)" [ngIfElse]="odd">
+            <app-even [evenNumber]="nr"></app-even>
+          </ng-template>
+          <ng-template #odd>
+            <app-odd [oddNumber]="nr"></app-odd>
+          </ng-template>
+        </ng-container>
+      </div>
+    </div>
   </div>
 </div>
