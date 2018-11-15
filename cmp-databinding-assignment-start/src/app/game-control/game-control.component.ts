@@ -18,9 +18,8 @@ export class GameControlComponent implements OnInit {
 
   onStart() {
     const self = this;
-    this.timer = setInterval(function() {
-      self.increment++;
-      self.event.emit(self.increment);
+    this.timer = setInterval(() => {
+      this.event.emit(this.increment++);
     }, 1000);
   }
 
