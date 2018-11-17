@@ -17,4 +17,17 @@ export class ShopingListComponent implements OnInit {
   ngOnInit() {
   }
 
+  onIngredientAdd(ingredient: Ingredient) {
+    this.ingredients.push(ingredient);
+  }
+
+  onIngredientDelete(ingredient: Ingredient) {
+    this.ingredients = this.ingredients.filter((i) => {
+      return i.name !== ingredient.name;
+    });
+  }
+
+  onIngredientClear() {
+    this.ingredients.splice(0, this.ingredients.length);
+  }
 }
