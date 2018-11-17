@@ -7,10 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'course-project';
-  selectedMenu: string;
+  loadedFeature = 'recipe';
 
-  onMenuSelected(selectedMenu: string) {
-    console.log('here:' + selectedMenu);
-    this.selectedMenu = selectedMenu;
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
   }
 }
