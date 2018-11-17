@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'course-project';
+  selectedMenu: string;
+
+  onMenuSelected(selectedMenu: string) {
+    console.log('here:' + selectedMenu);
+    this.selectedMenu = selectedMenu;
+  }
 }
