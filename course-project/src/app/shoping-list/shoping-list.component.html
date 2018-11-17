@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-10">
     <app-shopping-list-edit
-      (add)="onIngredientAdd($event)"
+      (ingredientAdded)="onIngredientAdded($event)"
       (delete)="onIngredientDelete($event)"
       (clear)="onIngredientClear()"
     ></app-shopping-list-edit>

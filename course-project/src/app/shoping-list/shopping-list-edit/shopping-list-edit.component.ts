@@ -8,10 +8,10 @@ import { Ingredient } from '../../shared/ingredient.model';
 })
 export class ShoppingListEditComponent implements OnInit {
 
-  @ViewChild('nameInput') nameRef: ElementRef;
-  @ViewChild('amountInput') amountRef: ElementRef;
+  @ViewChild('nameInput') nameInputRef: ElementRef;
+  @ViewChild('amountInput') amountInputRef: ElementRef;
 
-  @Output() add = new EventEmitter<Ingredient>();
+  @Output() ingredientAdded = new EventEmitter<Ingredient>();
   @Output() clear = new EventEmitter<void>();
   @Output() delete = new EventEmitter<Ingredient>();
 
@@ -20,16 +20,17 @@ export class ShoppingListEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAdd() {
-    this.add.emit(new Ingredient(
-      this.nameRef.nativeElement.value,
-      +this.amountRef.nativeElement.value));
-    }
+  onAddItem() {
+    const ingName = this.nameInputRef.nativeElement.value;
+    const ingAmount = this.amountInputRef.nativeElement.value;
+    const newIngredient = new Ingredient(ingName, +ingAmount);
+    this.ingredientAdded.emit(newIngredient);
+  }
 
   onDelete() {
     this.delete.emit(new Ingredient(
-      this.nameRef.nativeElement.value,
-      +this.amountRef.nativeElement.value));
+      this.nameInputRef.nativeElement.value,
+      +this.amountInputRef.nativeElement.value));
   }
 
   onClear() {
