@@ -5,7 +5,6 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable()
 export class RecipeService {
-  recipeSelected: EventEmitter<Recipe> = new EventEmitter<Recipe>();
 
   constructor(private slService: ShoppingListService) {}
 // noinspection TsLint
@@ -31,6 +30,9 @@ export class RecipeService {
     this.slService.addIngredients(ingredients);
   }
 
+  getRecipe(id: number): Recipe {
+    return this.recipes[id];
+  }
 
   getRecipes() {
     return this.recipes.slice();
