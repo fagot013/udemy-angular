@@ -6,7 +6,7 @@ import { UsersService } from './users.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   user1Activated = false;
   user2Activated = false;
 
