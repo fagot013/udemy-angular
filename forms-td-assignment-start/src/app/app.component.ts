@@ -7,14 +7,15 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  defaultSubscription = 'Advanced';
+  subscriptions = ['Basic', 'Advanced', 'Pro'];
+  defaultSubscription = this.subscriptions[1];
   @ViewChild('f') form: NgForm;
   formValue: any = null;
   submitted = false;
 
   onSubmit() {
     console.log('On submit');
-    console.log(this.form);
+    console.log(this.form.value);
     this.formValue = this.form.value;
     this.submitted = true;
   }
