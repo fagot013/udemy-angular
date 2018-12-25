@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-shopping-list-edit',
@@ -8,9 +9,7 @@ import { ShoppingListService } from '../shopping-list.service';
   styleUrls: ['./shopping-list-edit.component.css']
 })
 export class ShoppingListEditComponent implements OnInit {
-
-  @ViewChild('nameInput') nameInputRef: ElementRef;
-  @ViewChild('amountInput') amountInputRef: ElementRef;
+  @ViewChild('shoppingItem') shoppingItem: NgForm;
 
   @Output() clear = new EventEmitter<void>();
   @Output() delete = new EventEmitter<Ingredient>();
@@ -21,16 +20,12 @@ export class ShoppingListEditComponent implements OnInit {
   }
 
   onAddItem() {
-    const ingName = this.nameInputRef.nativeElement.value;
-    const ingAmount = this.amountInputRef.nativeElement.value;
-    const newIngredient = new Ingredient(ingName, +ingAmount);
+    const newIngredient = new Ingredient(this.shoppingItem.value.itemName, +this.shoppingItem.value.itemAmount);
     this.slService.addIngredient(newIngredient);
   }
 
   onDelete() {
-    this.delete.emit(new Ingredient(
-      this.nameInputRef.nativeElement.value,
-      +this.amountInputRef.nativeElement.value));
+    this.delete.emit(new Ingredient(this.shoppingItem.value.itemName, +this.shoppingItem.value.itemAmount));
   }
 
   onClear() {
