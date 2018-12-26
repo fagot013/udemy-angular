@@ -23,14 +23,8 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onIngredientDelete(ingredient: Ingredient) {
-    this.ingredients = this.ingredients.filter((i) => {
-      return i.name !== ingredient.name;
-    });
-  }
-
-  onIngredientClear() {
-    this.ingredients.splice(0, this.ingredients.length);
+  onEditItem(index: number) {
+    this.shoppingListService.startEditing.next(index);
   }
 
   ngOnDestroy(): void {
