@@ -6,7 +6,9 @@
           <button type="submit" class="btn btn-success"
                   [disabled]="!recipeForm.valid"
           >Save</button>
-          <button type="button" class="btn btn-danger">Cancel</button>
+          <button type="button"
+                  (click)="onCancel()"
+                  class="btn btn-danger">Cancel</button>
         </div>
       </div>
       <div class="row">
@@ -29,13 +31,15 @@
               type="text"
               [formControlName]="'imagePath'"
               id="imagePath"
-              class="form-control">
+              class="form-control"
+              #imagePath
+            >
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <img class="img-responsive" src="">
+          <img class="img-responsive" [src]="imagePath.value">
         </div>
       </div>
       <div class="row">
