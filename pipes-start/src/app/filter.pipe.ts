@@ -8,7 +8,8 @@ import { v } from '@angular/core/src/render3';
 export class FilterPipe implements PipeTransform {
 
   transform(value: any, filterString: string, propertyName: string): any {
-    if (value.lenght > 0 || filterString === '' ) {
+    // debugger;
+    if (value.length === 0 || filterString === '' ) {
       return value;
     }
     const resultArray = [];
