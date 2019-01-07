@@ -3,12 +3,15 @@ import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Subject } from 'rxjs';
+import { Http, Response } from '@angular/http';
 
 @Injectable()
 export class RecipeService {
 
-  constructor(private slService: ShoppingListService) {}
+  constructor(private slService: ShoppingListService, private http: Http) {}
   recipesChanged = new Subject<Recipe[]>();
+  fireBaseUrl = 'https://ng-recipe-book-35bc7.firebaseio.com/data.json';
+
 // noinspection TsLint
   private recipes: Recipe[] = [
     new Recipe('Tasty Schnitzel',
@@ -53,5 +56,22 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  saveData() {
+    this.http.put(this.fireBaseUrl, this.recipes).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    );
+  }
+
+  fetchData() {
+    this.http.get(this.fireBaseUrl).subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+      },
+      (error) => console.log(error)
+    );
   }
 }
