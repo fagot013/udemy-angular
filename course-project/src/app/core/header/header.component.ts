@@ -31,6 +31,10 @@ export class HeaderComponent implements OnInit {
     this.dataStorageService.getRecipes();
   }
 
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/']);
