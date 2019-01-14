@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="3.0"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_1">
+    <display-name>Ng Recipe Book</display-name>
+    <description>Ng Recipe Book</description>
+    <error-page>
+	<error-code>404</error-code>
+      	<location>/index.html</location>
+    </error-page>                         
+    <welcome-file-list id="WelcomeFileList_1">
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>
