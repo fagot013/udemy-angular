@@ -10,6 +10,7 @@ import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../shared/auth.interceptor';
+import { LoggingInterceptor } from '../shared/logging.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,8 @@ import { AuthInterceptor } from '../shared/auth.interceptor';
     RecipeResolver,
     DataStorageService,
     AuthService,
-    {
-      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
   ]
 
 })
