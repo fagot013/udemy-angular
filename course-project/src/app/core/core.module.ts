@@ -8,6 +8,8 @@ import { RecipeService } from '../recipes/recipe.service';
 import { RecipeResolver } from '../recipes/recipe-resolver.service';
 import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../shared/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,10 @@ import { AuthService } from '../auth/auth.service';
     RecipeService,
     RecipeResolver,
     DataStorageService,
-    AuthService
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    }
   ]
 
 })
