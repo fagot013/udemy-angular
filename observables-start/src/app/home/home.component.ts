@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       ));
     this.numberObsSubscription = myNumbers.subscribe(
       (num: number) => {
-        console.log(num);
+        // console.log(num);
       }
     );
     const myObservable: Observable<string> = Observable.create((observer: Observer<string>) => {
