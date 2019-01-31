@@ -18,7 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
         // headers:  req.headers.append('', '')
         params: req.params.append('auth', authState.token)
       });
-      debugger;
       return next.handle(copiedReq);
     });
   }
