@@ -1,11 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { DataStorageService } from '../../shared/data-storage.service';
-import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
 import { Observable } from 'rxjs';
+import { Logout } from '../../auth/store/auth.actions';
 // import { HttpEvent } from '@angular/common/http';
 
 @Component({
@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(private dataStorageService: DataStorageService,
               private router: Router,
-              private authService: AuthService,
               private store: Store<fromApp.AppState>
   ) { }
 
@@ -40,8 +39,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.logout();
-    this.router.navigate(['/']);
+    this.store.dispatch(new Logout());
   }
 
 }
