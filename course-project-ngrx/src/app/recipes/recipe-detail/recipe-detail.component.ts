@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Ingredient } from '../../shared/ingredient.model';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
-import * as fromApp from '../../store/app.reducers';
+import { Observable } from 'rxjs';
+import { FeatureState, State } from '../store/recipe.reducers';
+import { DeleteRecipe } from '../store/recipe.actions';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -14,9 +14,9 @@ import * as fromApp from '../../store/app.reducers';
 })
 export class RecipeDetailComponent implements OnInit {
 
-  recipe: Recipe;
+  recipesState: Observable<State>;
   id: number;
-  constructor(private store: Store<fromApp.AppState>,
+  constructor(private store: Store<FeatureState>,
               private recipeService: RecipeService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -27,15 +27,16 @@ export class RecipeDetailComponent implements OnInit {
         this.id = +params['id'];
       }
     );
-    this.route.data.subscribe(data => {
-      if (data['recipe']) {
-        this.recipe = data['recipe'];
-      }
-    });
+    this.recipesState = this.store.select('recipes');
   }
 
   toShoppingList() {
-      this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients));
+    this.store.select('recipes')
+      .take(1)
+      .subscribe( (state: State) => {
+        this.store.dispatch(new ShoppingListActions.AddIngredients(state.recipes[this.id].ingredients));
+      });
+
   }
 
   onEditRecipe() {
@@ -44,7 +45,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onDeleteRecipe() {
-    this.recipeService.deleteRecipe(this.id);
+    this.store.dispatch(new DeleteRecipe(this.id));
     this.router.navigate(['/recipes'], {relativeTo: this.route});
   }
 }
