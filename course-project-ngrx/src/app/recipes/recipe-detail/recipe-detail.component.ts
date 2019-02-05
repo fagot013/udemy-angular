@@ -5,7 +5,7 @@ import * as ShoppingListActions from '../../shopping-list/store/shopping-list.ac
 import { Observable } from 'rxjs';
 import { FeatureState, State } from '../store/recipe.reducers';
 import { DeleteRecipe } from '../store/recipe.actions';
-import 'rxjs/add/operator/take';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -31,7 +31,7 @@ export class RecipeDetailComponent implements OnInit {
 
   toShoppingList() {
     this.store.select('recipes')
-      .take(1)
+      .pipe(take(1))
       .subscribe( (state: State) => {
         this.store.dispatch(new ShoppingListActions.AddIngredients(state.recipes[this.id].ingredients));
       });

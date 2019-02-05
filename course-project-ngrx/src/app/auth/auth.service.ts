@@ -2,7 +2,7 @@ import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '../store/app.reducers';
-import { Logout, SetToken, SignIn, SignUp } from './store/auth.actions';
+import { Logout, SetToken, SignUp } from './store/auth.actions';
 import { Store } from '@ngrx/store';
 
 @Injectable()

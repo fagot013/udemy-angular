@@ -6,8 +6,6 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../shared/auth.interceptor';
 import { LoggingInterceptor } from '../shared/logging.interceptor';
-// noinspection TsLint
-import 'rxjs/Rx';
 
 @NgModule({
   declarations: [

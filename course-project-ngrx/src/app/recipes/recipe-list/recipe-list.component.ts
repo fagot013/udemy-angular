@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable} from 'rxjs';
 import { FeatureState, State } from '../store/recipe.reducers';
 import { Store } from '@ngrx/store';
 

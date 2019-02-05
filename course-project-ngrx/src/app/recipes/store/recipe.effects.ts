@@ -1,10 +1,10 @@
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { FETCH_RECIPE, FetchRecipe, SAVE_RECIPE, SaveRecipe, SET_RECIPES } from './recipe.actions';
+import { FETCH_RECIPE, FetchRecipe, SAVE_RECIPE, SET_RECIPES } from './recipe.actions';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Recipe } from '../recipe.model';
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { FeatureState, State } from './recipe.reducers';
+import { FeatureState} from './recipe.reducers';
 import { Store } from '@ngrx/store';
 
 @Injectable()
