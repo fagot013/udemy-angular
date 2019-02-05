@@ -1,9 +1,11 @@
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { FETCH_RECIPE, FetchRecipe, SET_RECIPES } from './recipe.actions';
-import { map, switchMap } from 'rxjs/operators';
+import { FETCH_RECIPE, FetchRecipe, SAVE_RECIPE, SaveRecipe, SET_RECIPES } from './recipe.actions';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Recipe } from '../recipe.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
+import { FeatureState, State } from './recipe.reducers';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class RecipeEffects {
@@ -34,8 +36,21 @@ export class RecipeEffects {
       })
     );
 
+  @Effect({dispatch: false})
+  recipeStore =  this.actions$
+    .pipe(
+      ofType(SAVE_RECIPE),
+      withLatestFrom(this.store.select('recipes')),
+      switchMap(([action, state]) => {
+        const req = new HttpRequest('PUT', this.fireBaseUrl, state.recipes, {
+          reportProgress: true
+        });
+        return this.httpClient.request(req);
+      })
+    );
 
    constructor(private actions$: Actions,
+               private store: Store<FeatureState>,
                private httpClient: HttpClient) {}
 
 }
