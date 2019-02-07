@@ -8,6 +8,28 @@ import { animate } from '@angular/animations';
   selector: 'app-root',
   templateUrl: './app.component.html',
   animations: [
+
+    trigger('list1', [
+      state('in', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100px)'
+        }),
+        animate(300)
+      ]),
+      transition('* => void', [
+        animate(800, style({
+          transform: 'translateX(100px)',
+          opacity: 0
+        }))
+      ]),
+    ]),
+
+
     trigger('divState', [
       state('normal', style({
         'background-color': 'red',
@@ -61,5 +83,9 @@ export class AppComponent {
 
   onAdd(item) {
     this.list.push(item);
+  }
+
+  onDelete(item) {
+    this.list.splice(this.list.indexOf(item), 1);;
   }
 }
